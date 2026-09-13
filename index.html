@@ -6,61 +6,82 @@
 <title>Poker Tournament Leaderboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<div class="bg-glow"></div>
+<div class="bg-glow" aria-hidden="true">
+  <div class="bg-image"></div>
+  <span class="bg-suit bg-suit-left">&spades;</span>
+  <span class="bg-suit bg-suit-right">&clubs;</span>
+</div>
 
 <header class="page-header">
-  <div class="header-inner">
-    <div class="title-block">
-      <span class="chip-suit" id="eventLogo">&spades;</span>
-      <div>
-        <h1 id="eventName">Poker Tournament</h1>
-        <p class="subtitle" id="eventSubtitle">Season Leaderboard</p>
-      </div>
-    </div>
-    <div class="header-stats" id="headerStats"></div>
+  <span class="chip-suit" id="eventLogo">&spades;</span>
+  <div class="title-row">
+    <span class="title-rule"></span>
+    <h1 id="eventName">Poker Tournament</h1>
+    <span class="title-rule"></span>
   </div>
+  <p class="subtitle" id="eventSubtitle">Season Leaderboard</p>
+  <div class="header-stats" id="headerStats"></div>
 </header>
 
 <main class="board-wrap">
   <div class="board-card">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+          <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f7dc8a"/>
+            <stop offset="0.55" stop-color="#d9a93f"/>
+            <stop offset="1" stop-color="#a8761f"/>
+          </linearGradient>
+        </defs>
+      </svg>
     <table class="leaderboard" id="leaderboard">
       <thead>
         <tr>
-          <th class="col-rank">#</th>
+          <th class="col-rank">Rank</th>
           <th class="col-name">Player</th>
-          <th class="col-num">Played</th>
+          <th class="col-num" title="Games played">Games</th>
           <th class="col-num col-icon" title="Wins">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M7 4h10v3a5 5 0 0 1-5 5 5 5 0 0 1-5-5V4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-              <path d="M7 5H4v1a3 3 0 0 0 3 3M17 5h3v1a3 3 0 0 1-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="M12 12v3M9 19h6M10 19v-2.5a2 2 0 0 1 4 0V19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6.5 3h11v5.5a5.5 5.5 0 0 1-11 0Z" fill="url(#goldGrad)"/>
+              <path d="M6.5 5H3.5v1.5a4 4 0 0 0 4 4M17.5 5h3v1.5a4 4 0 0 1-4 4" fill="none" stroke="url(#goldGrad)" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M10.5 13.5h3v4h-3Z" fill="url(#goldGrad)"/>
+              <path d="M7.5 21a2.5 2.5 0 0 1 2.5-3.5h4a2.5 2.5 0 0 1 2.5 3.5Z" fill="url(#goldGrad)"/>
+              <text x="12" y="10.6" font-size="7" font-weight="800" text-anchor="middle" fill="#2a1e08" font-family="Montserrat, sans-serif">1</text>
             </svg>
             <span class="sr-only">Wins</span>
           </th>
           <th class="col-num col-icon" title="Top 3 finishes">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect x="3" y="11" width="5" height="9" rx="1" fill="currentColor" opacity="0.6"/>
-              <rect x="9.5" y="6" width="5" height="14" rx="1" fill="currentColor"/>
-              <rect x="16" y="13" width="5" height="7" rx="1" fill="currentColor" opacity="0.4"/>
+            <svg viewBox="0 0 30 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="11" width="9" height="12" fill="url(#goldGrad)"/>
+              <rect x="10.5" y="3" width="9" height="20" fill="#f3e2b0"/>
+              <rect x="20" y="13" width="9" height="10" fill="url(#goldGrad)"/>
+              <text x="5.5" y="20.5" font-size="7.5" font-weight="800" text-anchor="middle" fill="#2a1e08" font-family="Montserrat, sans-serif">2</text>
+              <text x="15" y="11" font-size="7.5" font-weight="800" text-anchor="middle" fill="#2a1e08" font-family="Montserrat, sans-serif">1</text>
+              <text x="24.5" y="21.5" font-size="7.5" font-weight="800" text-anchor="middle" fill="#2a1e08" font-family="Montserrat, sans-serif">3</text>
             </svg>
             <span class="sr-only">Top 3 finishes</span>
           </th>
           <th class="col-num col-icon" title="Top 5 finishes">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect x="1" y="16" width="3" height="5" rx="0.8" fill="currentColor" opacity="0.35"/>
-              <rect x="5.75" y="13" width="3" height="8" rx="0.8" fill="currentColor" opacity="0.5"/>
-              <rect x="10.5" y="10" width="3" height="11" rx="0.8" fill="currentColor" opacity="0.65"/>
-              <rect x="15.25" y="7" width="3" height="14" rx="0.8" fill="currentColor" opacity="0.8"/>
-              <rect x="20" y="4" width="3" height="17" rx="0.8" fill="currentColor"/>
+            <svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g id="laurel" fill="url(#goldGrad)">
+                <path d="M9.5 22C5 20.5 2.5 16 3.5 7" fill="none" stroke="#d9a93f" stroke-width="1" stroke-linecap="round"/>
+                <ellipse cx="6" cy="20" rx="1" ry="2.1" transform="rotate(-60 6 20)"/>
+                <ellipse cx="3.7" cy="16.4" rx="1" ry="2.1" transform="rotate(-30 3.7 16.4)"/>
+                <ellipse cx="2.9" cy="12.3" rx="1" ry="2.1" transform="rotate(-8 2.9 12.3)"/>
+                <ellipse cx="3.3" cy="8.2" rx="1" ry="2.1" transform="rotate(15 3.3 8.2)"/>
+              </g>
+              <use href="#laurel" transform="translate(36 0) scale(-1 1)"/>
+              <rect x="11" y="4" width="14" height="18" rx="2" fill="url(#goldGrad)"/>
+              <text x="18" y="17.5" font-size="12" font-weight="800" text-anchor="middle" fill="#2a1e08" font-family="Montserrat, sans-serif">5</text>
             </svg>
             <span class="sr-only">Top 5 finishes</span>
           </th>
-          <th class="col-num col-points">Points</th>
+          <th class="col-num col-points">Pts</th>
         </tr>
       </thead>
       <tbody id="leaderboardBody">
@@ -69,10 +90,6 @@
   </div>
   <p class="hint">Tap a player for detailed stats</p>
 </main>
-
-<footer class="page-footer">
-  <p id="lastUpdated"></p>
-</footer>
 
 <!-- Player detail overlay -->
 <div class="overlay" id="overlay">

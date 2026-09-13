@@ -52,13 +52,13 @@ function renderLeaderboard(players) {
     tr.dataset.rank = rank;
     tr.style.animationDelay = `${i * 45}ms`;
     tr.innerHTML = `
-      <td class="col-rank"><span class="rank-badge">${rank}</span></td>
+      <td class="col-rank"><span class="rank-badge"><span>${rank}</span></span></td>
       <td class="player-name">${escapeHtml(p.name)}</td>
       <td class="col-num">${p.gamesPlayed}</td>
       <td class="col-num">${p.wins}</td>
       <td class="col-num">${p.top3}</td>
       <td class="col-num">${p.top5}</td>
-      <td class="col-num points-val">${p.points}</td>
+      <td class="col-num points-val">${p.points.toLocaleString('en-AU')}</td>
     `;
     tr.addEventListener('click', () => openDetail(p, rank, players.length));
     tbody.appendChild(tr);
@@ -119,11 +119,6 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
-function setLastUpdated(players) {
-  const el = document.getElementById('lastUpdated');
-  el.textContent = `${players.length} players tracked — edit data/players.json to update`;
-}
-
 async function init() {
   const overlay = document.getElementById('overlay');
   document.getElementById('closeBtn').addEventListener('click', closeDetail);
@@ -142,7 +137,6 @@ async function init() {
   renderHeader(config);
   renderHeaderStats(config, players);
   renderLeaderboard(players);
-  setLastUpdated(players);
 }
 
 init();

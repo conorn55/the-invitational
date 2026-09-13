@@ -3,8 +3,5 @@
   "subtitle": "Season Leaderboard",
   "logoText": "♠",
   "logoImage": "assets/logo.png",
-  "headerStats": [
-    { "label": "Players", "type": "playerCount" },
-    { "label": "Games", "type": "maxGames" }
-  ]
+  "headerStats": []
 }
