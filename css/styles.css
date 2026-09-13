@@ -150,6 +150,22 @@ table.leaderboard {
   color: var(--gold-soft);
 }
 
+.leaderboard .col-icon svg {
+  width: 18px;
+  height: 18px;
+  color: var(--text-dim);
+  vertical-align: middle;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 .leaderboard tbody tr {
   border-bottom: 1px solid var(--border);
   cursor: pointer;
