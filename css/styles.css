@@ -46,8 +46,8 @@ body {
   position: absolute;
   inset: -30px;
   background: url('../assets/background.png') center / cover no-repeat;
-  filter: blur(6px);
-  opacity: 0.43;
+  filter: blur(5px);
+  opacity: 0.4;
 }
 
 /* Thin gold diagonals in the top corners */
@@ -90,8 +90,6 @@ body {
   background-clip: text;
   color: transparent;
 }
-
-.chip-suit:empty { display: none; }
 
 .chip-suit img {
   display: block;
@@ -337,12 +335,9 @@ tr[data-rank="3"] .rank-badge { --x: 798; }
   line-height: 1.15;
 }
 
-/* inline-block + nowrap: the nickname stays beside the name when it fits,
-   otherwise the whole nickname drops to the next line rather than splitting */
 .nickname {
-  display: inline-block;
-  white-space: nowrap;
-  font-size: 0.75em;
+  display: block;
+  font-size: 0.8em;
   font-weight: 600;
   font-style: italic;
   color: #e7b955;
@@ -538,8 +533,6 @@ tr[data-rank="3"] .rank-badge { --x: 798; }
   }
   .leaderboard thead th { font-size: 10px; letter-spacing: 0.1em; height: 44px; }
   .leaderboard td.player-name { font-size: 15px; padding-left: 8px; }
-  /* At 75% size an unbroken nickname pushes the table past the screen edge on phones */
-  .nickname { white-space: normal; }
   .leaderboard td.points-val { font-size: 17px; }
   .leaderboard td.col-rank { padding-left: 6px; text-align: center; }
   .leaderboard .col-icon svg { width: 28px; height: 24px; }

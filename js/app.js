@@ -90,8 +90,7 @@ function renderHeader(config) {
   if (config.logoImage) {
     logoEl.innerHTML = `<img src="${config.logoImage}" alt="${escapeHtml(config.eventName)} logo">`;
   } else {
-    // Empty logoText and logoImage means no logo; .chip-suit:empty hides the space
-    logoEl.textContent = config.logoText || '';
+    logoEl.textContent = config.logoText || '♠';
   }
 }
 
@@ -119,8 +118,7 @@ function renderLeaderboard(players) {
 }
 
 function nicknameHtml(p) {
-  // Leading space gives the browser a place to wrap the nickname onto its own line
-  return p.nickname ? ` <span class="nickname">“${escapeHtml(p.nickname)}”</span>` : '';
+  return p.nickname ? `<span class="nickname">“${escapeHtml(p.nickname)}”</span>` : '';
 }
 
 function pct(n) {

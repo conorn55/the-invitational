@@ -29,8 +29,8 @@ Edit [`data/config.json`](data/config.json) — no HTML editing needed:
 {
   "eventName": "The Invitational",
   "subtitle": "Season Leaderboard",
-  "logoText": "",
-  "logoImage": "",
+  "logoText": "♠",
+  "logoImage": "assets/logo.png",
   "headerStats": []
 }
 ```
@@ -38,7 +38,6 @@ Edit [`data/config.json`](data/config.json) — no HTML editing needed:
 - `eventName` / `subtitle` — the big gold title and the spaced-out line underneath it, centred at the top of the page.
 - `logoText` — an emoji or short text shown above the title (e.g. `"♠"`, `"🏆"`).
 - `logoImage` — a path to an image (e.g. `"assets/logo.png"`) shown above the title instead of `logoText`; set it to `""` to use `logoText`. Put the image in the `assets/` folder first.
-- Leave both `logoText` and `logoImage` as `""` for no logo (the current setting).
 - `headerStats` — optional stat figures shown centred under the subtitle. It's empty (`[]`) by default, so nothing shows. To add some, give each one a `label` (whatever text you want) and a `type`:
   - `"playerCount"` — number of players
   - `"maxGames"` — highest Games value across all players
