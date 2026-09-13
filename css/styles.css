@@ -1,15 +1,15 @@
 :root {
-  --bg: #0b0e14;
-  --panel: #131826;
-  --panel-alt: #171d2e;
-  --border: #232b3d;
+  --bg: #08090b;
+  --panel: #141311;
+  --panel-alt: #1c1a16;
+  --border: #2c2822;
   --gold: #d4af37;
-  --gold-soft: #f2d67c;
+  --gold-soft: #f5d876;
   --silver: #c7ccd6;
   --bronze: #cd7f32;
-  --text: #e8eaf0;
-  --text-dim: #8b93a7;
-  --accent: #5b8cff;
+  --text: #f0ede6;
+  --text-dim: #a39a8a;
+  --accent: #e8a33d;
   --win: #34d399;
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -32,7 +32,7 @@ body {
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(ellipse 800px 500px at 20% -10%, rgba(91, 140, 255, 0.14), transparent 60%),
+    radial-gradient(ellipse 800px 500px at 20% -10%, rgba(212, 175, 55, 0.12), transparent 60%),
     radial-gradient(ellipse 700px 500px at 100% 0%, rgba(212, 175, 55, 0.10), transparent 60%);
 }
 
