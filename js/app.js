@@ -1,5 +1,57 @@
-const DATA_URL = 'data/players.json';
+const DATA_URL = 'data/players.csv';
 const CONFIG_URL = 'data/config.json';
+
+// CSV header -> player field. Columns are matched by name, so their order doesn't matter.
+const CSV_COLUMNS = {
+  'name': 'name',
+  'nickname': 'nickname',
+  'games': 'gamesPlayed',
+  'wins': 'wins',
+  'top 3': 'top3',
+  'top 5': 'top5',
+  'points': 'points',
+};
+
+// Splits one CSV line. Quotes are only special at the start of a field, so both
+// Excel-style "Steve ""The Joker""" and hand-typed Steve "The Joker" work.
+function splitCsvLine(line) {
+  const fields = [];
+  let i = 0;
+  while (i <= line.length) {
+    let value = '';
+    if (line[i] === '"') {
+      i++;
+      while (i < line.length) {
+        if (line[i] === '"' && line[i + 1] === '"') { value += '"'; i += 2; }
+        else if (line[i] === '"') { i++; break; }
+        else { value += line[i++]; }
+      }
+      const end = line.indexOf(',', i);
+      i = end === -1 ? line.length + 1 : end + 1;
+    } else {
+      const end = line.indexOf(',', i);
+      value = line.slice(i, end === -1 ? line.length : end);
+      i = end === -1 ? line.length + 1 : end + 1;
+    }
+    fields.push(value.trim());
+  }
+  return fields;
+}
+
+function parsePlayersCsv(text) {
+  // Strip the byte-order mark spreadsheet apps sometimes add, and skip blank lines
+  const lines = text.replace(/^﻿/, '').split(/\r?\n/).filter(l => l.trim());
+  const headers = splitCsvLine(lines[0]).map(h => CSV_COLUMNS[h.toLowerCase()]);
+  return lines.slice(1).map(line => {
+    const player = {};
+    splitCsvLine(line).forEach((value, i) => {
+      const field = headers[i];
+      if (!field) return;
+      player[field] = field === 'name' || field === 'nickname' ? value : Number(value) || 0;
+    });
+    return player;
+  });
+}
 
 function withDerived(players) {
   return players.map(p => {
@@ -53,7 +105,7 @@ function renderLeaderboard(players) {
     tr.style.animationDelay = `${i * 45}ms`;
     tr.innerHTML = `
       <td class="col-rank"><span class="rank-badge"><span>${rank}</span></span></td>
-      <td class="player-name">${escapeHtml(p.name)}</td>
+      <td class="player-name">${escapeHtml(p.name)}${nicknameHtml(p)}</td>
       <td class="col-num">${p.gamesPlayed}</td>
       <td class="col-num">${p.wins}</td>
       <td class="col-num">${p.top3}</td>
@@ -63,6 +115,10 @@ function renderLeaderboard(players) {
     tr.addEventListener('click', () => openDetail(p, rank, players.length));
     tbody.appendChild(tr);
   });
+}
+
+function nicknameHtml(p) {
+  return p.nickname ? `<span class="nickname">“${escapeHtml(p.nickname)}”</span>` : '';
 }
 
 function pct(n) {
@@ -75,7 +131,7 @@ function openDetail(p, rank, totalPlayers) {
     <div class="detail-header">
       <div class="detail-rank">${rank}</div>
       <div>
-        <p class="detail-name">${escapeHtml(p.name)}</p>
+        <p class="detail-name">${escapeHtml(p.name)}${nicknameHtml(p)}</p>
         <p class="detail-sub">Rank ${rank} of ${totalPlayers}</p>
       </div>
     </div>
@@ -129,8 +185,12 @@ async function init() {
     if (e.key === 'Escape') closeDetail();
   });
 
-  const [playersRes, configRes] = await Promise.all([fetch(DATA_URL), fetch(CONFIG_URL)]);
-  const raw = await playersRes.json();
+  // no-cache: GitHub Pages lets browsers reuse JSON for 10 minutes, so results looked stale after a push
+  const [playersRes, configRes] = await Promise.all([
+    fetch(DATA_URL, { cache: 'no-cache' }),
+    fetch(CONFIG_URL, { cache: 'no-cache' }),
+  ]);
+  const raw = parsePlayersCsv(await playersRes.text());
   const config = await configRes.json();
   const players = withDerived(raw).sort((a, b) => b.points - a.points);
 

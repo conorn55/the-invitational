@@ -331,6 +331,16 @@ tr[data-rank="3"] .rank-badge { --x: 798; }
   font-size: clamp(17px, 2.6vh, 24px);
   padding-left: 20px;
   white-space: nowrap;
+  line-height: 1.15;
+}
+
+.nickname {
+  display: block;
+  font-size: 0.6em;
+  font-weight: 600;
+  font-style: italic;
+  color: #e7b955;
+  margin-top: 2px;
 }
 
 .leaderboard td.points-val {
@@ -515,7 +525,8 @@ tr[data-rank="3"] .rank-badge { --x: 798; }
 }
 
 @media (max-width: 560px) {
-  .col-num.col-hide, th.col-num:nth-child(3), td:nth-child(3) {
+  /* Hide Top 5 on phones */
+  .leaderboard th:nth-child(6), .leaderboard td:nth-child(6) {
     display: none;
   }
   .leaderboard td, .leaderboard th {
