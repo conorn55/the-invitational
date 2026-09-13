@@ -118,7 +118,8 @@ function renderLeaderboard(players) {
 }
 
 function nicknameHtml(p) {
-  return p.nickname ? `<span class="nickname">“${escapeHtml(p.nickname)}”</span>` : '';
+  // Leading space gives the browser a place to wrap the nickname onto its own line
+  return p.nickname ? ` <span class="nickname">“${escapeHtml(p.nickname)}”</span>` : '';
 }
 
 function pct(n) {

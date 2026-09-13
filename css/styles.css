@@ -330,13 +330,15 @@ tr[data-rank="3"] .rank-badge { --x: 798; }
   font-weight: 600;
   font-size: clamp(17px, 2.6vh, 24px);
   padding-left: 20px;
-  white-space: nowrap;
   line-height: 1.15;
 }
 
+/* inline-block + nowrap: the nickname stays beside the name when it fits,
+   otherwise the whole nickname drops to the next line rather than splitting */
 .nickname {
-  display: block;
-  font-size: 0.6em;
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 0.75em;
   font-weight: 600;
   font-style: italic;
   color: #e7b955;
@@ -519,10 +521,6 @@ tr[data-rank="3"] .rank-badge { --x: 798; }
   .leaderboard td.col-rank, .leaderboard td.player-name { padding-left: 12px; }
 }
 
-/* Below this there isn't room for long nicknames on one line */
-@media (max-width: 720px) {
-  .leaderboard td.player-name { white-space: normal; }
-}
 
 @media (max-width: 560px) {
   /* Hide Top 5 on phones */
@@ -536,6 +534,8 @@ tr[data-rank="3"] .rank-badge { --x: 798; }
   }
   .leaderboard thead th { font-size: 10px; letter-spacing: 0.1em; height: 44px; }
   .leaderboard td.player-name { font-size: 15px; padding-left: 8px; }
+  /* At 75% size an unbroken nickname pushes the table past the screen edge on phones */
+  .nickname { white-space: normal; }
   .leaderboard td.points-val { font-size: 17px; }
   .leaderboard td.col-rank { padding-left: 6px; text-align: center; }
   .leaderboard .col-icon svg { width: 28px; height: 24px; }

@@ -21,34 +21,39 @@ Steve,The Joker,6,1,3,4,120
 
 Save the file, then commit and push (see below) to update the live site.
 
-## Changing the title, logo and top-right stats
+## Changing the title, logo and header stats
 
 Edit [`data/config.json`](data/config.json) — no HTML editing needed:
 
 ```json
 {
-  "eventName": "Poker Tournament",
+  "eventName": "The Invitational",
   "subtitle": "Season Leaderboard",
   "logoText": "♠",
-  "logoImage": "",
-  "headerStats": [
-    { "label": "Players", "type": "playerCount" },
-    { "label": "Games", "type": "maxGames" },
-    { "label": "Total Pts", "type": "totalPoints" }
-  ]
+  "logoImage": "assets/logo.png",
+  "headerStats": []
 }
 ```
 
-- `eventName` / `subtitle` — the big title and text underneath it.
-- `logoText` — an emoji or short text shown as the logo (e.g. `"♠"`, `"🏆"`).
-- `logoImage` — set this to a path (e.g. `"assets/logo.png"`) to use an image instead; leave it `""` to use `logoText`. Drop your image file into an `assets/` folder in this project first.
-- `headerStats` — the three tiles top-right. Each one has a `label` (whatever text you want) and a `type`:
+- `eventName` / `subtitle` — the big gold title and the spaced-out line underneath it, centred at the top of the page.
+- `logoText` — an emoji or short text shown above the title (e.g. `"♠"`, `"🏆"`).
+- `logoImage` — a path to an image (e.g. `"assets/logo.png"`) shown above the title instead of `logoText`; set it to `""` to use `logoText`. Put the image in the `assets/` folder first.
+- `headerStats` — optional stat figures shown centred under the subtitle. It's empty (`[]`) by default, so nothing shows. To add some, give each one a `label` (whatever text you want) and a `type`:
   - `"playerCount"` — number of players
-  - `"maxGames"` — highest `gamesPlayed` across all players
-  - `"totalPoints"` — sum of everyone's `points`
-  - `"custom"` — a fixed value you set yourself, add a `"value"` field, e.g. `{ "label": "Prize Pool", "type": "custom", "value": "$400" }`
+  - `"maxGames"` — highest Games value across all players
+  - `"totalPoints"` — sum of everyone's Points
+  - `"custom"` — a fixed value you set yourself, add a `"value"` field
 
-Reorder, remove, or add tiles by editing the `headerStats` array — the layout adjusts automatically.
+  For example:
+
+  ```json
+  "headerStats": [
+    { "label": "Players", "type": "playerCount" },
+    { "label": "Prize Pool", "type": "custom", "value": "$400" }
+  ]
+  ```
+
+  Stats sit side by side in one row, but turning them on adds that row to the header, so on shorter screens the table may no longer fit without scrolling.
 
 ## Viewing changes locally before publishing
 
