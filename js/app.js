@@ -1,4 +1,5 @@
 const DATA_URL = 'data/players.json';
+const CONFIG_URL = 'data/config.json';
 
 function withDerived(players) {
   return players.map(p => {
@@ -10,17 +11,35 @@ function withDerived(players) {
   });
 }
 
-function renderHeaderStats(players) {
-  const totalGames = Math.max(...players.map(p => p.gamesPlayed), 0);
-  const totalPlayers = players.length;
-  const totalPoints = players.reduce((sum, p) => sum + p.points, 0);
+function statValue(type, players, custom) {
+  switch (type) {
+    case 'playerCount': return players.length;
+    case 'maxGames': return Math.max(...players.map(p => p.gamesPlayed), 0);
+    case 'totalPoints': return players.reduce((sum, p) => sum + p.points, 0);
+    case 'custom': return custom ?? '';
+    default: return '';
+  }
+}
 
+function renderHeaderStats(config, players) {
   const el = document.getElementById('headerStats');
-  el.innerHTML = `
-    <div class="hstat"><div class="val">${totalPlayers}</div><div class="lbl">Players</div></div>
-    <div class="hstat"><div class="val">${totalGames}</div><div class="lbl">Games</div></div>
-    <div class="hstat"><div class="val">${totalPoints}</div><div class="lbl">Total Pts</div></div>
-  `;
+  const stats = config.headerStats || [];
+  el.innerHTML = stats.map(s => `
+    <div class="hstat"><div class="val">${statValue(s.type, players, s.value)}</div><div class="lbl">${escapeHtml(s.label)}</div></div>
+  `).join('');
+}
+
+function renderHeader(config) {
+  document.getElementById('eventName').textContent = config.eventName;
+  document.getElementById('eventSubtitle').textContent = config.subtitle;
+  document.title = config.eventName;
+
+  const logoEl = document.getElementById('eventLogo');
+  if (config.logoImage) {
+    logoEl.innerHTML = `<img src="${config.logoImage}" alt="${escapeHtml(config.eventName)} logo">`;
+  } else {
+    logoEl.textContent = config.logoText || '♠';
+  }
 }
 
 function renderLeaderboard(players) {
@@ -115,11 +134,13 @@ async function init() {
     if (e.key === 'Escape') closeDetail();
   });
 
-  const res = await fetch(DATA_URL);
-  const raw = await res.json();
+  const [playersRes, configRes] = await Promise.all([fetch(DATA_URL), fetch(CONFIG_URL)]);
+  const raw = await playersRes.json();
+  const config = await configRes.json();
   const players = withDerived(raw).sort((a, b) => b.points - a.points);
 
-  renderHeaderStats(players);
+  renderHeader(config);
+  renderHeaderStats(config, players);
   renderLeaderboard(players);
   setLastUpdated(players);
 }

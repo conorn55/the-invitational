@@ -64,6 +64,15 @@ body {
   filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.4));
 }
 
+.chip-suit img {
+  display: block;
+  height: 44px;
+  width: 44px;
+  object-fit: contain;
+  border-radius: 8px;
+  filter: none;
+}
+
 h1 {
   font-family: var(--font-display);
   font-weight: 700;

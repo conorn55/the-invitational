@@ -1,0 +1,11 @@
+{
+  "eventName": "Poker Tournament",
+  "subtitle": "Season Leaderboard",
+  "logoText": "♠",
+  "logoImage": "",
+  "headerStats": [
+    { "label": "Players", "type": "playerCount" },
+    { "label": "Games", "type": "maxGames" },
+    { "label": "Total Pts", "type": "totalPoints" }
+  ]
+}

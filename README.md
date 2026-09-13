@@ -23,6 +23,35 @@ After each game, edit [`data/players.json`](data/players.json). Each player is a
 
 Save the file, then commit and push (see below) to update the live site.
 
+## Changing the title, logo and top-right stats
+
+Edit [`data/config.json`](data/config.json) — no HTML editing needed:
+
+```json
+{
+  "eventName": "Poker Tournament",
+  "subtitle": "Season Leaderboard",
+  "logoText": "♠",
+  "logoImage": "",
+  "headerStats": [
+    { "label": "Players", "type": "playerCount" },
+    { "label": "Games", "type": "maxGames" },
+    { "label": "Total Pts", "type": "totalPoints" }
+  ]
+}
+```
+
+- `eventName` / `subtitle` — the big title and text underneath it.
+- `logoText` — an emoji or short text shown as the logo (e.g. `"♠"`, `"🏆"`).
+- `logoImage` — set this to a path (e.g. `"assets/logo.png"`) to use an image instead; leave it `""` to use `logoText`. Drop your image file into an `assets/` folder in this project first.
+- `headerStats` — the three tiles top-right. Each one has a `label` (whatever text you want) and a `type`:
+  - `"playerCount"` — number of players
+  - `"maxGames"` — highest `gamesPlayed` across all players
+  - `"totalPoints"` — sum of everyone's `points`
+  - `"custom"` — a fixed value you set yourself, add a `"value"` field, e.g. `{ "label": "Prize Pool", "type": "custom", "value": "$400" }`
+
+Reorder, remove, or add tiles by editing the `headerStats` array — the layout adjusts automatically.
+
 ## Viewing changes locally before publishing
 
 Because the page loads `players.json` with `fetch`, double-clicking `index.html` won't work (browsers block that for local files). Run a tiny local server from this folder instead:
@@ -47,4 +76,5 @@ From then on, any push to `main` updates the live site automatically — so upda
 - `index.html` — page markup
 - `css/styles.css` — all styling
 - `js/app.js` — loads the JSON, renders the table, handles the click-through detail panel
-- `data/players.json` — the only file you need to touch to update results
+- `data/players.json` — the file you touch to update results
+- `data/config.json` — the file you touch to change the title, logo and header stats
