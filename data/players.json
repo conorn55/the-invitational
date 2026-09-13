@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Conor",
+    "gamesPlayed": 6,
+    "wins": 2,
+    "top3": 4,
+    "top5": 5,
+    "points": 145
+  },
+  {
+    "name": "Sam",
+    "gamesPlayed": 6,
+    "wins": 1,
+    "top3": 3,
+    "top5": 5,
+    "points": 118
+  },
+  {
+    "name": "Jess",
+    "gamesPlayed": 5,
+    "wins": 1,
+    "top3": 2,
+    "top5": 4,
+    "points": 96
+  },
+  {
+    "name": "Marcus",
+    "gamesPlayed": 6,
+    "wins": 0,
+    "top3": 2,
+    "top5": 3,
+    "points": 78
+  },
+  {
+    "name": "Priya",
+    "gamesPlayed": 4,
+    "wins": 1,
+    "top3": 1,
+    "top5": 2,
+    "points": 65
+  },
+  {
+    "name": "Dave",
+    "gamesPlayed": 6,
+    "wins": 0,
+    "top3": 0,
+    "top5": 2,
+    "points": 40
+  }
+]
