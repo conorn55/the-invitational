@@ -90,7 +90,8 @@ function renderHeader(config) {
   if (config.logoImage) {
     logoEl.innerHTML = `<img src="${config.logoImage}" alt="${escapeHtml(config.eventName)} logo">`;
   } else {
-    logoEl.textContent = config.logoText || '♠';
+    // Empty logoText and logoImage means no logo; .chip-suit:empty hides the space
+    logoEl.textContent = config.logoText || '';
   }
 }
 

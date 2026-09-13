@@ -19,7 +19,7 @@ python3 -m http.server 8737
 ## Architecture
 
 - `js/app.js` `init()` fetches `data/players.csv` and `data/config.json` in parallel, parses the CSV with `parsePlayersCsv` (headers mapped to fields via `CSV_COLUMNS`), adds derived rates (`withDerived`), sorts by `points` descending, then renders the header, header stats, and table. Rank is array position after sorting; it is never stored in the data.
-- `data/config.json` drives the title (`eventName`), `subtitle`, logo (`logoImage` wins over `logoText`) and `headerStats`. `headerStats` is currently `[]` on purpose to match the design; `.header-stats:empty` hides the container.
+- `data/config.json` drives the title (`eventName`), `subtitle`, logo (`logoImage` wins over `logoText`; both empty hides it via `.chip-suit:empty`, the current setting) and `headerStats`. `headerStats` is currently `[]` on purpose to match the design; `.header-stats:empty` hides the container.
 - Table header cells (including the gold SVG icons for Wins / Top 3 / Top 5) are static in `index.html`; body rows are built in `renderLeaderboard`. The SVG icons share one `#goldGrad` gradient defined in a hidden `<svg>` above the table.
 - Clicking a row opens the detail overlay (`openDetail`), which reuses the same player object.
 - Player names pass through `escapeHtml`. The hand-rolled CSV parser accepts both Excel-style quoting (`"Steve ""The Joker"""`) and bare quotes (`Steve "The Joker"`); a name containing a comma must be wrapped in quotes.

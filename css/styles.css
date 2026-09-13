@@ -46,8 +46,8 @@ body {
   position: absolute;
   inset: -30px;
   background: url('../assets/background.png') center / cover no-repeat;
-  filter: blur(5px);
-  opacity: 0.4;
+  filter: blur(6px);
+  opacity: 0.43;
 }
 
 /* Thin gold diagonals in the top corners */
@@ -90,6 +90,8 @@ body {
   background-clip: text;
   color: transparent;
 }
+
+.chip-suit:empty { display: none; }
 
 .chip-suit img {
   display: block;
@@ -235,6 +237,8 @@ table.leaderboard {
 .leaderboard .col-icon svg {
   width: 40px;
   height: 32px;
+  /* Header letter-spacing would add trailing space after the icon digits and push them left */
+  letter-spacing: 0;
   vertical-align: middle;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
 }
