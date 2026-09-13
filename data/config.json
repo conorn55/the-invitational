@@ -1,11 +1,10 @@
 {
-  "eventName": "Poker Tournament",
+  "eventName": "The Invitational",
   "subtitle": "Season Leaderboard",
   "logoText": "♠",
   "logoImage": "assets/logo.png",
   "headerStats": [
     { "label": "Players", "type": "playerCount" },
-    { "label": "Games", "type": "maxGames" },
-    { "label": "Total Pts", "type": "totalPoints" }
+    { "label": "Games", "type": "maxGames" }
   ]
 }
