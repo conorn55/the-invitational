@@ -2,7 +2,7 @@
   "eventName": "Poker Tournament",
   "subtitle": "Season Leaderboard",
   "logoText": "♠",
-  "logoImage": "",
+  "logoImage": "assets/logo.png",
   "headerStats": [
     { "label": "Players", "type": "playerCount" },
     { "label": "Games", "type": "maxGames" },
