@@ -228,7 +228,7 @@ table.leaderboard {
 }
 
 .leaderboard .col-rank { width: 11%; }
-.leaderboard .col-name { width: 24%; }
+.leaderboard .col-name { width: 32%; }
 
 .leaderboard thead .col-name { color: #b9bec7; }
 
@@ -330,6 +330,7 @@ tr[data-rank="3"] .rank-badge { --x: 798; }
   font-weight: 600;
   font-size: clamp(17px, 2.6vh, 24px);
   padding-left: 20px;
+  white-space: nowrap;
 }
 
 .leaderboard td.points-val {
@@ -499,6 +500,18 @@ tr[data-rank="3"] .rank-badge { --x: 798; }
   background: linear-gradient(90deg, var(--accent), var(--gold-soft));
   width: 0%;
   transition: width 0.6s cubic-bezier(.2,.8,.2,1);
+}
+
+/* Tablet widths: the one-line player name needs the room, so tighten cell padding */
+@media (max-width: 760px) {
+  .leaderboard td, .leaderboard th { padding-left: 8px; padding-right: 8px; }
+  .leaderboard thead th { font-size: 13px; letter-spacing: 0.1em; }
+  .leaderboard td.col-rank, .leaderboard td.player-name { padding-left: 12px; }
+}
+
+/* Below this there isn't room for long nicknames on one line */
+@media (max-width: 720px) {
+  .leaderboard td.player-name { white-space: normal; }
 }
 
 @media (max-width: 560px) {
