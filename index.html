@@ -18,6 +18,10 @@
 </div>
 
 <header class="page-header">
+  <div class="view-tabs">
+    <button class="view-tab active" data-view="leaderboard">Leaderboard</button>
+    <button class="view-tab" data-view="schedule">Schedule</button>
+  </div>
   <span class="chip-suit" id="eventLogo">&spades;</span>
   <div class="title-row">
     <span class="title-rule"></span>
@@ -85,6 +89,17 @@
         </tr>
       </thead>
       <tbody id="leaderboardBody">
+      </tbody>
+    </table>
+    <table class="leaderboard schedule" id="schedule" hidden>
+      <thead>
+        <tr>
+          <th class="col-rank">Game</th>
+          <th class="col-date">Date</th>
+          <th class="col-name">Location</th>
+        </tr>
+      </thead>
+      <tbody id="scheduleBody">
       </tbody>
     </table>
   </div>

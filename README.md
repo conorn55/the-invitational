@@ -12,14 +12,28 @@ Conor,,6,2,4,5,145
 Steve,The Joker,6,1,3,4,120
 ```
 
-- `Nickname` is optional; leave it blank for players without one. It shows in gold under the name.
-
-- Add a new player by adding a new row. Keep the header row; its column order doesn't matter.
+- Add a new player by adding a new row. Keep the header row; its column order doesn't matter, but don't rename the headings.
+- `Nickname` is optional; leave it blank for players without one. It shows in gold italics on the line under the name. Type it plainly (`The Joker`); the quote marks are added for you.
 - Save as CSV (not .xlsx or .numbers) and keep the filename `players.csv`.
-- Ranking is automatic — the page sorts everyone by `points` descending, so you don't need to reorder the file yourself.
-- `points` is whatever your own scoring system produces (this site doesn't calculate points from placements — you enter the total).
+- Ranking is automatic — the page sorts everyone by `Points`, highest first, so you don't need to reorder the file yourself.
+- `Points` is whatever your own scoring system produces (this site doesn't calculate points from placements — you enter the total).
+- If a name contains a comma, wrap it in double quotes. Spreadsheet apps do this for you.
 
 Save the file, then commit and push (see below) to update the live site.
+
+## Updating the schedule
+
+The **Leaderboard** and **Schedule** buttons (top right) switch views; the one you're on is lit up gold. The schedule lists games from [`data/schedule.csv`](data/schedule.csv):
+
+```csv
+Game,Date,Location,Complete
+2,26/09/2026,Conor's place,No
+```
+
+- `Date` must be `DD/MM/YYYY`. Games are sorted by date; none are ever hidden.
+- Set `Complete` to `Yes` once a game has happened — that row shows with a strikethrough instead of disappearing. Leave it `No` for games still to come.
+- At least five rows always show; any not filled from the file show dashes.
+- Add, edit or remove rows freely; keep the header row and filename.
 
 ## Changing the title, logo and header stats
 
@@ -74,6 +88,12 @@ Then open `http://localhost:8000` in your browser.
 
 From then on, any push to `main` updates the live site automatically — so updating results is just: edit `players.csv`, commit, push.
 
+GitHub takes a minute or two to publish after a push. New results then show on a normal refresh. Design changes (HTML, CSS or JavaScript) can take up to 10 minutes to appear because browsers keep a saved copy; use a hard refresh (`Cmd + Shift + R` on Mac, `Ctrl + F5` on Windows) or a private window to see them straight away.
+
+## On phones
+
+On screens 560px wide or narrower (most phones), the Top 5 column is hidden to save space. Long nicknames may wrap onto two lines.
+
 ## Structure
 
 - `index.html` — page markup
@@ -81,3 +101,4 @@ From then on, any push to `main` updates the live site automatically — so upda
 - `js/app.js` — loads the CSV and config, renders the table, handles the click-through detail panel
 - `data/players.csv` — the file you touch to update results
 - `data/config.json` — the file you touch to change the title, logo and header stats
+- `assets/` — images: `logo.png` (header logo), `background.png` (blurred page background) and `rank.png` (the four rank shields, cut out by position, so keep the shields in the same places if you replace it)

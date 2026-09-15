@@ -81,6 +81,44 @@ body {
   text-align: center;
 }
 
+/* Pinned to the top corners, either side of the logo, so they don't add height to the header */
+.view-tabs {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.view-tab {
+  background: #2a2d33;
+  border: 1px solid #4a4e56;
+  color: #8a8f98;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.view-tab:hover { filter: brightness(1.2); }
+
+/* The selected view is highlighted gold */
+.view-tab.active {
+  background: var(--panel-alt);
+  border-color: var(--gold);
+  color: var(--gold-soft);
+  cursor: default;
+  filter: none;
+}
+
+.leaderboard.schedule tbody tr { cursor: default; }
+.leaderboard.schedule tbody tr.complete td { text-decoration: line-through; opacity: 0.55; }
+.leaderboard.schedule .col-date { width: 34%; }
+
 .chip-suit {
   display: inline-block;
   font-size: 44px;
@@ -540,6 +578,7 @@ tr[data-rank="3"] .rank-badge { --x: 798; }
   .board-wrap { padding: 0 12px; }
   .board-card { padding: 0 4px; }
   .bg-suit { display: none; }
+  .view-tab { font-size: 11px; padding: 6px 10px; }
   .title-row { gap: 10px; }
   h1 { white-space: normal; }
   .header-stats { gap: 12px; }

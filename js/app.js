@@ -1,5 +1,6 @@
 const DATA_URL = 'data/players.csv';
 const CONFIG_URL = 'data/config.json';
+const SCHEDULE_URL = 'data/schedule.csv';
 
 // CSV header -> player field. Columns are matched by name, so their order doesn't matter.
 const CSV_COLUMNS = {
@@ -165,6 +166,57 @@ function openDetail(p, rank, totalPlayers) {
   });
 }
 
+// Dates in schedule.csv are DD/MM/YYYY
+function parseDate(str) {
+  const [d, m, y] = str.split('/').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+// All games are shown, soonest first (undated ones listed last); completed
+// games (Complete=Yes) are rendered with a strikethrough rather than hidden.
+function parseScheduleCsv(text) {
+  const lines = text.replace(/^﻿/, '').split(/\r?\n/).filter(l => l.trim());
+  const headers = splitCsvLine(lines[0]).map(h => h.toLowerCase());
+
+  return lines.slice(1)
+    .map(line => {
+      const fields = splitCsvLine(line);
+      const get = name => fields[headers.indexOf(name)] || '';
+      return {
+        game: get('game'),
+        date: get('date') ? parseDate(get('date')) : null,
+        location: get('location'),
+        complete: get('complete').trim().toLowerCase() === 'yes',
+      };
+    })
+    .sort((a, b) => (a.date ?? Infinity) - (b.date ?? Infinity));
+}
+
+const MIN_SCHEDULE_ROWS = 5;
+
+function renderSchedule(games) {
+  const tbody = document.getElementById('scheduleBody');
+  const rows = [...games];
+  while (rows.length < MIN_SCHEDULE_ROWS) rows.push({});
+
+  tbody.innerHTML = rows.map((g, i) => `
+    <tr class="${g.complete ? 'complete' : ''}" style="animation-delay: ${i * 45}ms">
+      <td class="col-rank">${g.game ? escapeHtml(g.game) : '–'}</td>
+      <td class="col-num">${g.date ? g.date.toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) : '–'}</td>
+      <td class="player-name">${g.location ? escapeHtml(g.location) : '–'}</td>
+    </tr>
+  `).join('');
+}
+
+function showView(view) {
+  document.getElementById('leaderboard').hidden = view !== 'leaderboard';
+  document.querySelector('.hint').hidden = view !== 'leaderboard';
+  document.getElementById('schedule').hidden = view !== 'schedule';
+  document.querySelectorAll('.view-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.view === view);
+  });
+}
+
 function closeDetail() {
   document.getElementById('overlay').classList.remove('open');
 }
@@ -178,6 +230,9 @@ function escapeHtml(str) {
 async function init() {
   const overlay = document.getElementById('overlay');
   document.getElementById('closeBtn').addEventListener('click', closeDetail);
+  document.querySelectorAll('.view-tab').forEach(tab => {
+    tab.addEventListener('click', () => showView(tab.dataset.view));
+  });
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) closeDetail();
   });
@@ -186,9 +241,10 @@ async function init() {
   });
 
   // no-cache: GitHub Pages lets browsers reuse JSON for 10 minutes, so results looked stale after a push
-  const [playersRes, configRes] = await Promise.all([
+  const [playersRes, configRes, scheduleRes] = await Promise.all([
     fetch(DATA_URL, { cache: 'no-cache' }),
     fetch(CONFIG_URL, { cache: 'no-cache' }),
+    fetch(SCHEDULE_URL, { cache: 'no-cache' }),
   ]);
   const raw = parsePlayersCsv(await playersRes.text());
   const config = await configRes.json();
@@ -197,6 +253,7 @@ async function init() {
   renderHeader(config);
   renderHeaderStats(config, players);
   renderLeaderboard(players);
+  renderSchedule(parseScheduleCsv(await scheduleRes.text()));
 }
 
 init();
