@@ -32,7 +32,7 @@ Game,Date,Location,Complete
 
 - `Date` must be `DD/MM/YYYY`. Games are sorted by date; none are ever hidden.
 - Set `Complete` to `Yes` once a game has happened — that row shows with a strikethrough instead of disappearing. Leave it `No` for games still to come.
-- At least five rows always show; any not filled from the file show dashes.
+- The list shows exactly as many rows as the file has. Add as many games as you like — past about 8 rows it scrolls inside its own box instead of growing the page.
 - Add, edit or remove rows freely; keep the header row and filename.
 
 ## Changing the title, logo and header stats

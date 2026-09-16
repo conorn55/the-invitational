@@ -119,6 +119,23 @@ body {
 .leaderboard.schedule tbody tr.complete td { text-decoration: line-through; opacity: 0.55; }
 .leaderboard.schedule .col-date { width: 34%; }
 
+/* Schedule grows with the data instead of padding to a minimum row count;
+   past a certain length it scrolls internally rather than pushing the page
+   taller. thead/tbody rows become their own mini-tables so column widths
+   still line up once tbody scrolls independently. */
+.leaderboard.schedule tbody {
+  display: block;
+  max-height: calc(8 * clamp(40px, 6.8vh, 64px) + 8 * 6px);
+  overflow-y: auto;
+}
+
+.leaderboard.schedule thead tr,
+.leaderboard.schedule tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
 .chip-suit {
   display: inline-block;
   font-size: 44px;

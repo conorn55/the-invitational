@@ -192,18 +192,14 @@ function parseScheduleCsv(text) {
     .sort((a, b) => (a.date ?? Infinity) - (b.date ?? Infinity));
 }
 
-const MIN_SCHEDULE_ROWS = 5;
-
 function renderSchedule(games) {
   const tbody = document.getElementById('scheduleBody');
-  const rows = [...games];
-  while (rows.length < MIN_SCHEDULE_ROWS) rows.push({});
 
-  tbody.innerHTML = rows.map((g, i) => `
+  tbody.innerHTML = games.map((g, i) => `
     <tr class="${g.complete ? 'complete' : ''}" style="animation-delay: ${i * 45}ms">
       <td class="col-rank">${g.game ? escapeHtml(g.game) : '–'}</td>
-      <td class="col-num">${g.date ? g.date.toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) : '–'}</td>
-      <td class="player-name">${g.location ? escapeHtml(g.location) : '–'}</td>
+      <td class="col-num col-date">${g.date ? g.date.toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) : '–'}</td>
+      <td class="player-name col-name">${g.location ? escapeHtml(g.location) : '–'}</td>
     </tr>
   `).join('');
 }
