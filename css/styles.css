@@ -82,36 +82,49 @@ body {
 }
 
 /* A full-width bar rather than floating buttons, so it reads as part of
-   the page's structure and stays centred at every screen size. */
+   the page's structure and stays centred at every screen size. Top border
+   is a touch heavier than the bottom one to mark it as the page's menu
+   bar; each tab is styled as its own clickable button rather than plain
+   underlined text. Generous gap keeps the pair from reading as bunched
+   together in the middle of the bar. */
 .view-tabs {
   display: flex;
   justify-content: center;
-  gap: 4px;
-  background: rgba(0, 0, 0, 0.35);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  gap: 40px;
+  padding: 10px 0;
+  background: linear-gradient(180deg, #17140e, #0c0a08);
+  border-top: 2px solid var(--gold);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
 }
 
 .view-tab {
-  background: transparent;
-  border: none;
-  border-bottom: 3px solid transparent;
+  background: var(--panel-alt);
+  border: 1px solid rgba(212, 175, 55, 0.3);
   color: #8a8f98;
   font-family: var(--font-title);
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 14px 24px 11px;
+  padding: 10px 22px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
-.view-tab:hover { color: var(--gold-soft); }
+.view-tab:hover {
+  color: var(--gold-soft);
+  border-color: var(--gold);
+  background: #242019;
+}
 
 /* The selected view is highlighted gold */
 .view-tab.active {
+  background: linear-gradient(180deg, #2c2412, #1a1509);
+  border-color: var(--gold);
   color: var(--gold-soft);
-  border-bottom-color: var(--gold);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
   cursor: default;
 }
 
@@ -577,7 +590,8 @@ tr[data-rank="3"] .rank-badge { --x: 798; }
   .board-wrap { padding: 0 12px; }
   .board-card { padding: 0 4px; }
   .bg-suit { display: none; }
-  .view-tab { font-size: 11px; padding: 12px 16px 9px; }
+  .view-tabs { gap: 16px; }
+  .view-tab { font-size: 11px; padding: 8px 16px; }
   .title-row { gap: 10px; }
   h1 { white-space: normal; }
   .header-stats { gap: 12px; }
