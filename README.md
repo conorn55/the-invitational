@@ -23,7 +23,7 @@ Save the file, then commit and push (see below) to update the live site.
 
 ## Updating the schedule
 
-The **Leaderboard** and **Schedule** buttons (top right) switch views; the one you're on is lit up gold. The schedule lists games from [`data/schedule.csv`](data/schedule.csv):
+The **Leaderboard** and **Schedule** tabs (top of the page) switch views; the one you're on is underlined gold, and the subtitle under the title changes to match. The schedule lists games from [`data/schedule.csv`](data/schedule.csv):
 
 ```csv
 Game,Date,Location,Complete
@@ -35,7 +35,7 @@ Game,Date,Location,Complete
 - The list shows exactly as many rows as the file has. Add as many games as you like — past about 8 rows it scrolls inside its own box instead of growing the page.
 - Add, edit or remove rows freely; keep the header row and filename.
 
-## Changing the title, logo and header stats
+## Changing the title and header stats
 
 Edit [`data/config.json`](data/config.json) — no HTML editing needed:
 
@@ -43,15 +43,11 @@ Edit [`data/config.json`](data/config.json) — no HTML editing needed:
 {
   "eventName": "The Invitational",
   "subtitle": "Season Leaderboard",
-  "logoText": "♠",
-  "logoImage": "assets/logo.png",
   "headerStats": []
 }
 ```
 
-- `eventName` / `subtitle` — the big gold title and the spaced-out line underneath it, centred at the top of the page.
-- `logoText` — an emoji or short text shown above the title (e.g. `"♠"`, `"🏆"`).
-- `logoImage` — a path to an image (e.g. `"assets/logo.png"`) shown above the title instead of `logoText`; set it to `""` to use `logoText`. Put the image in the `assets/` folder first.
+- `eventName` / `subtitle` — the big gold title and the spaced-out line underneath it, centred at the top of the page. On the Schedule tab, "Leaderboard" in the subtitle automatically switches to "Schedule".
 - `headerStats` — optional stat figures shown centred under the subtitle. It's empty (`[]`) by default, so nothing shows. To add some, give each one a `label` (whatever text you want) and a `type`:
   - `"playerCount"` — number of players
   - `"maxGames"` — highest Games value across all players
@@ -100,5 +96,5 @@ On screens 560px wide or narrower (most phones), the Top 5 column is hidden to s
 - `css/styles.css` — all styling
 - `js/app.js` — loads the CSV and config, renders the table, handles the click-through detail panel
 - `data/players.csv` — the file you touch to update results
-- `data/config.json` — the file you touch to change the title, logo and header stats
-- `assets/` — images: `logo.png` (header logo), `background.png` (blurred page background) and `rank.png` (the four rank shields, cut out by position, so keep the shields in the same places if you replace it)
+- `data/config.json` — the file you touch to change the title and header stats
+- `assets/` — images: `logo.png` (browser tab favicon), `background.png` (blurred page background) and `rank.png` (the four rank shields, cut out by position, so keep the shields in the same places if you replace it)

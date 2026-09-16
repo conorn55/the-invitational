@@ -77,42 +77,42 @@ body {
 .bg-suit-right { right: calc(50% - 470px); }
 
 .page-header {
-  padding: 10px 24px 0;
+  padding: 28px 24px 0;
   text-align: center;
 }
 
-/* Pinned to the top corners, either side of the logo, so they don't add height to the header */
+/* A full-width bar rather than floating buttons, so it reads as part of
+   the page's structure and stays centred at every screen size. */
 .view-tabs {
-  position: absolute;
-  top: 14px;
-  right: 32px;
   display: flex;
-  gap: 8px;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
 }
 
 .view-tab {
-  background: #2a2d33;
-  border: 1px solid #4a4e56;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
   color: #8a8f98;
   font-family: var(--font-title);
   font-weight: 700;
   font-size: 13px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 8px 14px;
-  border-radius: 8px;
+  padding: 14px 24px 11px;
   cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-.view-tab:hover { filter: brightness(1.2); }
+.view-tab:hover { color: var(--gold-soft); }
 
 /* The selected view is highlighted gold */
 .view-tab.active {
-  background: var(--panel-alt);
-  border-color: var(--gold);
   color: var(--gold-soft);
+  border-bottom-color: var(--gold);
   cursor: default;
-  filter: none;
 }
 
 .leaderboard.schedule tbody tr { cursor: default; }
@@ -134,24 +134,6 @@ body {
   display: table;
   width: 100%;
   table-layout: fixed;
-}
-
-.chip-suit {
-  display: inline-block;
-  font-size: 44px;
-  line-height: 1;
-  background: var(--gold-text);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.chip-suit img {
-  display: block;
-  height: 40px;
-  width: 40px;
-  object-fit: contain;
-  border-radius: 50%;
 }
 
 .title-row {
@@ -595,15 +577,7 @@ tr[data-rank="3"] .rank-badge { --x: 798; }
   .board-wrap { padding: 0 12px; }
   .board-card { padding: 0 4px; }
   .bg-suit { display: none; }
-  /* Absolute top-right positioning overlaps the logo once the header
-     stacks and grows taller on narrow screens, so drop into normal
-     flow and centre above the logo instead. */
-  .view-tabs {
-    position: static;
-    justify-content: center;
-    margin-bottom: 12px;
-  }
-  .view-tab { font-size: 11px; padding: 6px 10px; }
+  .view-tab { font-size: 11px; padding: 12px 16px 9px; }
   .title-row { gap: 10px; }
   h1 { white-space: normal; }
   .header-stats { gap: 12px; }

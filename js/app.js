@@ -84,15 +84,10 @@ function renderHeaderStats(config, players) {
 
 function renderHeader(config) {
   document.getElementById('eventName').textContent = config.eventName;
-  document.getElementById('eventSubtitle').textContent = config.subtitle;
+  const subtitleEl = document.getElementById('eventSubtitle');
+  subtitleEl.textContent = config.subtitle;
+  subtitleEl.dataset.base = config.subtitle;
   document.title = config.eventName;
-
-  const logoEl = document.getElementById('eventLogo');
-  if (config.logoImage) {
-    logoEl.innerHTML = `<img src="${config.logoImage}" alt="${escapeHtml(config.eventName)} logo">`;
-  } else {
-    logoEl.textContent = config.logoText || '♠';
-  }
 }
 
 function renderLeaderboard(players) {
@@ -211,6 +206,10 @@ function showView(view) {
   document.querySelectorAll('.view-tab').forEach(tab => {
     tab.classList.toggle('active', tab.dataset.view === view);
   });
+
+  const subtitleEl = document.getElementById('eventSubtitle');
+  const base = subtitleEl.dataset.base;
+  subtitleEl.textContent = view === 'schedule' ? base.replace(/leaderboard/i, 'Schedule') : base;
 }
 
 function closeDetail() {
