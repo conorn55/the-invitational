@@ -595,6 +595,14 @@ tr[data-rank="3"] .rank-badge { --x: 798; }
   .board-wrap { padding: 0 12px; }
   .board-card { padding: 0 4px; }
   .bg-suit { display: none; }
+  /* Absolute top-right positioning overlaps the logo once the header
+     stacks and grows taller on narrow screens, so drop into normal
+     flow and centre above the logo instead. */
+  .view-tabs {
+    position: static;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
   .view-tab { font-size: 11px; padding: 6px 10px; }
   .title-row { gap: 10px; }
   h1 { white-space: normal; }
